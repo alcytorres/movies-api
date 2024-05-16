@@ -28,4 +28,21 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
     assert_equal ["id", "title", "director", "release_year", "imdb_score"], data.keys
   end
 
+  test "update" do
+    movie = Movie.first
+    patch "/movies/#{movie.id}.json", params: { title: "Updated title" }
+    assert_response 200
+
+    data = JSON.parse(response.body)
+    assert_equal "Updated title", data["title"]
+  end
+
+  test "destroy" do
+    assert_difference "Movie.count", -1 do
+      delete "/movies/#{Movie.first.id}.json"
+      assert_response 200
+    end
+  end
+
+
 end
