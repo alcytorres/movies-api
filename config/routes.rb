@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/movies" => "movies#index"
   post "/movies" => "movies#create"
+  get "/movies/:id" => "movies#show"
 
 end
